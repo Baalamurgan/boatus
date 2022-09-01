@@ -2,7 +2,9 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "boatus-backend": "apps/boatus-backend",
     "boatus-frontend": "apps/boatus-frontend",
-    "boatus-frontend-e2e": "apps/boatus-frontend-e2e"
+    "boatus-frontend-e2e": "apps/boatus-frontend-e2e",
+    "db-access": "libs/db-access"
   }
 }
