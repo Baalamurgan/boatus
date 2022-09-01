@@ -7,5 +7,45 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://postgres:baalapostgre@localhost:5432/boatus"
+  // url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @default(now()) @map("updatedAt")
+  role      Role     @default(USER)
+  name      String
+  email     String   @unique
+  password  String
+  orders    Order[]
+  profile   Profile?
+}
+
+model Order {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @default(now()) @map("updatedAt")
+  user      User     @relation(fields: [userID], references: [id])
+  userID    Int      @unique
+}
+
+model Profile {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @default(now()) @map("updatedAt")
+  user      User     @relation(fields: [userID], references: [id])
+  userID    Int      @unique
+  name      String
+  email     String   @unique
+  password  String
+  dob       DateTime
+  address   String
+  number    String
+}
+
+enum Role {
+  USER
+  ADMIN
 }

@@ -10,8 +10,10 @@
   "private": true,
   "dependencies": {
     "@nrwl/next": "14.5.10",
+    "@prisma/client": "^4.3.0",
     "core-js": "^3.6.5",
     "express": "^4.18.1",
+    "express-validator": "^6.14.2",
     "next": "12.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -50,6 +52,7 @@
     "jest": "27.5.1",
     "nx": "14.5.10",
     "prettier": "^2.6.2",
+    "prisma": "^4.3.0",
     "react-test-renderer": "18.2.0",
     "sass": "1.54.0",
     "ts-jest": "27.1.4",
