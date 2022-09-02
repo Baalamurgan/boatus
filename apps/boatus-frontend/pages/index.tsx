@@ -1,6 +1,14 @@
+import { useEffect } from 'react';
 import styles from './index.module.scss';
 
 export function Index() {
+  useEffect(() => {
+    fetch(`localhost:8888/api/user/all`).then(async (res) => {
+      const response = await res.json();
+      console.log(response);
+    });
+  }, []);
+
   /*
    * Replace the elements below with your own.
    *

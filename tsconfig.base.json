@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@boatus/db-access": ["libs/db-access/src/index.ts"]
+      "@boatus/db-access": ["libs/db-access/src/index.ts"],
+      "@boatus/shared-types": ["libs/shared-types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

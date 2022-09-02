@@ -5,6 +5,7 @@
     "boatus-backend": "apps/boatus-backend",
     "boatus-frontend": "apps/boatus-frontend",
     "boatus-frontend-e2e": "apps/boatus-frontend-e2e",
-    "db-access": "libs/db-access"
+    "db-access": "libs/db-access",
+    "shared-types": "libs/shared-types"
   }
 }

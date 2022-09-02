@@ -1,26 +1,45 @@
-import { Request, NextFunction, Response } from "express";
-//eslint-disable-next-line @typescript-eslint/no-var-requires
-import jwt = require('jsonwebtoken');
+import { RequestHandler } from "express";
 
 import { db } from "@boatus/db-access"
-export const signin = (req: Request, res: Response) => {
+import { expressjwt } from "express-jwt";
+export const signin: RequestHandler = (req, res) => {
     db.user.findUnique({
         where: {
             email: req.body.email,
         }
     }).then(user => {
-        //creating token
-        const token = jwt.sign({ _id: user.id }, process.env.JWT_SECRET);
-        //put token in cookie
-        res.cookie("token", token, { expires: new Date(Date.now() + 9999) });
-        res.send({ message: 'Welcome to boatus-backend!', user: user, token: token });
+        if (req.body.password === user.password) {
+            res.send({ message: 'Welcome to Boatus!', user: user });
+        }
+        else {
+            res.send({ message: 'Wrong password' });
+        }
     }).catch(error => {
         res.send({ message: error.message, error: error });
     });
 }
 
-export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
-    console.log(req)
+//protected routes
+export const isSignedIn = expressjwt({
+    secret: process.env.JWT_SECRET,
+    algorithms: ['HS256']
+});
+
+//custom middlewares
+export const isAuthenticated: RequestHandler = (req, res, next) => {
+    // let checker = rew
+    // req.profile && req.auth && req.profile._id == req.auth._id;
+    console.log(req);
+    // if(!checker){
+    //     return res.status(403).json({
+    //         error: "ACCESS DENIED",
+    //     })
+    // }
+    next();
+}
+
+export const isAdmin: RequestHandler = (req, res, next) => {
+    console.log(req.body)
     if (!req)
         return res.status(403).json({
             error: "You are not ADMIN"
